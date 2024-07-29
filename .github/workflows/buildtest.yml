@@ -1,0 +1,17 @@
+name: buildtest
+
+on:
+    workflow_dispatch:
+        inputs:
+            role_arn:
+                required: true
+                type: string
+jobs:
+    build-and-push-image:
+        uses: LearnWithHomer/infrastructure-public/.github/workflows/build-and-push-image-to-ecr.yml@main
+        secrets:
+            ecr_repo: ${{ secrets.ECR_REPOSITORY }}
+            access_key_id: ${{ secrets.CODESPARK_AWS_ACCESS_KEY_ID }}
+            secret_access_key: ${{ secrets.CODESPARK_AWS_SECRET_ACCESS_KEY }}
+            aws_region: ${{ secrets.CODESPARK_AWS_REGION }}
+            gh_pkg_token: ${{ secrets.GH_PKG_TOKEN }}
